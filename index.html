@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Raoudha Baklawa — Carte Traiteur Libanais</title>
+    <style>
+      :root {
+        --pine: #1f4b3a;
+        --pine-dark: #163528;
+        --olive: #6b7c3d;
+        --gold: #c7a054;
+        --sand: #f7f1e7;
+        --cream: #fff8ef;
+        --ink: #1b1b1b;
+        --muted: #6a6a6a;
+        --card: #ffffff;
+        --shadow: 0 18px 40px rgba(24, 44, 35, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(1200px 700px at 10% -10%, rgba(199, 160, 84, 0.2), transparent 60%),
+          radial-gradient(900px 600px at 110% 10%, rgba(31, 75, 58, 0.15), transparent 55%),
+          linear-gradient(180deg, var(--cream), var(--sand));
+        min-height: 100vh;
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 24px 64px;
+      }
+
+      header {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        padding: 56px 48px 64px;
+        background: linear-gradient(135deg, rgba(31, 75, 58, 0.92), rgba(24, 53, 40, 0.86));
+        color: var(--cream);
+        box-shadow: var(--shadow);
+      }
+
+      header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px);
+        background-size: 28px 28px;
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      .hero-illustrations {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      .hero-illustrations svg {
+        position: absolute;
+      }
+
+      .hero-illustrations .cedar {
+        right: 8%;
+        bottom: -6%;
+        width: 220px;
+        opacity: 0.8;
+      }
+
+      .hero-illustrations .olive-branch {
+        left: -2%;
+        top: 12%;
+        width: 200px;
+      }
+
+      .hero-illustrations .lemon {
+        right: 20%;
+        top: 8%;
+        width: 90px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 90px;
+        height: 90px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.12);
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      .logo svg {
+        width: 58px;
+        height: 58px;
+      }
+
+      .brand h1 {
+        font-size: clamp(2.4rem, 3vw, 3.2rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .brand p {
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .header-copy {
+        margin-top: 28px;
+        max-width: 520px;
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
+
+      .header-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .tag {
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      main {
+        margin-top: 48px;
+        display: grid;
+        gap: 32px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .section-title span {
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .section-illustration {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+      }
+
+      .section-illustration svg {
+        width: 120px;
+        opacity: 0.55;
+      }
+
+      .menu-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 22px 22px 26px;
+        box-shadow: 0 12px 24px rgba(27, 27, 27, 0.08);
+        border: 1px solid rgba(31, 75, 58, 0.08);
+        transform: translateY(8px);
+        opacity: 0;
+        animation: rise 0.8s ease forwards;
+      }
+
+      .menu-image {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 16px;
+        margin-bottom: 14px;
+        box-shadow: 0 10px 22px rgba(31, 75, 58, 0.14);
+        border: 1px solid rgba(31, 75, 58, 0.08);
+      }
+
+      .menu-card:nth-child(1) { animation-delay: 0.05s; }
+      .menu-card:nth-child(2) { animation-delay: 0.12s; }
+      .menu-card:nth-child(3) { animation-delay: 0.2s; }
+      .menu-card:nth-child(4) { animation-delay: 0.28s; }
+      .menu-card:nth-child(5) { animation-delay: 0.36s; }
+      .menu-card:nth-child(6) { animation-delay: 0.44s; }
+
+      .menu-card h3 {
+        font-size: 1.45rem;
+        margin-bottom: 8px;
+      }
+
+      .menu-card p {
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.5;
+        min-height: 2.8em;
+      }
+
+      .price {
+        margin-top: 16px;
+        font-size: 1.2rem;
+        color: var(--pine);
+        font-weight: 600;
+      }
+
+      .highlight {
+        margin-top: 48px;
+        padding: 32px;
+        border-radius: 24px;
+        background: linear-gradient(140deg, rgba(199, 160, 84, 0.18), rgba(31, 75, 58, 0.08));
+        border: 1px solid rgba(199, 160, 84, 0.25);
+        display: grid;
+        gap: 12px;
+      }
+
+      .highlight h3 {
+        font-size: 1.6rem;
+      }
+
+      .highlight p {
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      footer {
+        margin-top: 48px;
+        text-align: center;
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 40px 24px 52px;
+        }
+
+        .hero-illustrations .cedar {
+          width: 170px;
+          right: 0;
+        }
+
+        .hero-illustrations .olive-branch {
+          width: 160px;
+          left: -12px;
+        }
+
+        .hero-illustrations .lemon {
+          width: 70px;
+        }
+
+        .brand {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .section-title {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="hero-illustrations" aria-hidden="true">
+          <svg class="cedar" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 14L132 60L100 52L68 60L100 14Z" fill="#C7A054"/>
+            <path d="M100 52L148 106L100 94L52 106L100 52Z" fill="#F7F1E7"/>
+            <path d="M100 92L160 160L100 146L40 160L100 92Z" fill="#C7A054"/>
+            <path d="M100 138L176 214L100 196L24 214L100 138Z" fill="#F7F1E7"/>
+            <rect x="92" y="196" width="16" height="50" rx="6" fill="#1F4B3A"/>
+          </svg>
+          <svg class="olive-branch" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 100C60 20 140 20 212 8" stroke="#F7F1E7" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="60" cy="70" rx="16" ry="8" fill="#C7A054"/>
+            <ellipse cx="88" cy="54" rx="16" ry="8" fill="#C7A054"/>
+            <ellipse cx="116" cy="42" rx="16" ry="8" fill="#C7A054"/>
+            <ellipse cx="144" cy="34" rx="16" ry="8" fill="#C7A054"/>
+            <ellipse cx="172" cy="26" rx="16" ry="8" fill="#C7A054"/>
+          </svg>
+          <svg class="lemon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M62 16C86 20 104 42 98 70C92 98 58 110 36 90C14 70 18 36 42 22" fill="#F7F1E7"/>
+            <path d="M62 16C86 20 104 42 98 70C92 98 58 110 36 90C14 70 18 36 42 22" stroke="#C7A054" stroke-width="4"/>
+          </svg>
+        </div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 6L38 18L52 14L44 26L58 30L44 34L52 46L38 42L32 58L26 42L12 46L20 34L6 30L20 26L12 14L26 18L32 6Z" fill="#C7A054"/>
+              <path d="M32 14L35.5 24L46 22L38 30L48 33L38 36L46 44L35.5 42L32 52L28.5 42L18 44L26 36L16 33L26 30L18 22L28.5 24L32 14Z" fill="#F7F1E7"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Raoudha Baklawa</h1>
+            <p>Traiteur Libanais</p>
+          </div>
+        </div>
+        <p class="header-copy">
+          Une carte concise et raffinée inspirée des grandes tables du Liban. Mezzes généreux, recettes
+          authentiques, et un cèdre emblématique pour signer chaque bouchée.
+        </p>
+        <div class="header-tags">
+          <span class="tag">Mezzes maison</span>
+          <span class="tag">Fraîcheur quotidienne</span>
+          <span class="tag">Événements &amp; buffets</span>
+        </div>
+      </header>
+
+      <main>
+        <section>
+          <div class="section-title">
+            <h2>Mezzes Froids</h2>
+            <span>À partager</span>
+          </div>
+          <div class="section-illustration" aria-hidden="true">
+            <svg viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="24" width="140" height="42" rx="20" fill="#FFFFFF" stroke="#C7A054" stroke-width="3"/>
+              <circle cx="48" cy="45" r="14" fill="#F7F1E7" stroke="#C7A054" stroke-width="3"/>
+              <circle cx="80" cy="45" r="14" fill="#F7F1E7" stroke="#C7A054" stroke-width="3"/>
+              <circle cx="112" cy="45" r="14" fill="#F7F1E7" stroke="#C7A054" stroke-width="3"/>
+            </svg>
+          </div>
+          <div class="menu-grid">
+            <article class="menu-card">
+              <img class="menu-image" src="https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?q=80&w=1152&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Houmous crémeux avec huile d'olive" loading="lazy" />
+              <h3>Houmous</h3>
+              <p>Purée de pois chiches, tahiné, citron frais et huile d'olive.</p>
+              <div class="price">5,50 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://i0.wp.com/lesplaisirssains.com/wp-content/uploads/2019/09/20190818125123.jpg?w=1280&ssl=1" alt="Aubergines grillées et tahiné" loading="lazy" />
+              <h3>Motabal</h3>
+              <p>Aubergines fumées, tahiné, citron et grenade.</p>
+              <div class="price">6,00 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://odelices.ouest-france.fr/images/recettes/taboule-libanais-quinoa1-714x1024.jpg.webp" alt="Salade de taboulé aux herbes fraîches" loading="lazy" />
+              <h3>Taboulé</h3>
+              <p>Persil, menthe, tomates fraîches et boulgour fin.</p>
+              <div class="price">6,50 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://i0.wp.com/academiefermentation.com/wp-content/uploads/2022/11/labneh-2--scaled.jpg?w=1920&ssl=1" alt="Labneh crémeux avec huile d'olive" loading="lazy" />
+              <h3>Labneh</h3>
+              <p>Yaourt égoutté, huile d'olive, menthe séchée.</p>
+              <div class="price">5,80 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://gourmandisesansfrontieres.fr/wp-content/uploads/2021/08/maghmouh-liban.jpg" alt="Aubergines confites et tomates mijotées" loading="lazy" />
+              <h3>Moussaka</h3>
+              <p>Aubergines confites, tomates, pois chiches et épices douces.</p>
+              <div class="price">6,80 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://images.radio-canada.ca/v1/alimentation/recette/4x3/sauce-ail-shawarma.jpg" alt="Crème à l'ail onctueuse" loading="lazy" />
+              <h3>Crème à l'ail</h3>
+              <p>Toum traditionnelle, ail, citron, huile et sel marin.</p>
+              <div class="price">4,90 €</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-title">
+            <h2>Mezzes Chauds</h2>
+            <span>Sortis du four</span>
+          </div>
+          <div class="section-illustration" aria-hidden="true">
+            <svg viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 60C40 20 120 20 140 60" stroke="#C7A054" stroke-width="4" stroke-linecap="round"/>
+              <path d="M46 60C56 40 104 40 114 60" stroke="#F7F1E7" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="80" cy="30" r="10" fill="#F7F1E7" stroke="#C7A054" stroke-width="3"/>
+            </svg>
+          </div>
+          <div class="menu-grid">
+            <article class="menu-card">
+              <img class="menu-image" src="https://i0.wp.com/iran-cuisine.com/wp-content/uploads/2023/09/recette-kebbe-libanais-kebbeh-kibbeh.jpeg?fit=806%2C827&ssl=1" alt="Kebbé doré et croustillant" loading="lazy" />
+              <h3>Kebbé</h3>
+              <p>Boulgour fin, viande assaisonnée, pignons.</p>
+              <div class="price">7,50 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://roseencuisine.com/wp-content/uploads/2022/05/9D974179-C802-4F6C-A807-4B8E98D4705D-scaled.jpeg" alt="Sambousek croustillants" loading="lazy" />
+              <h3>Sambousek</h3>
+              <p>Chaussons croustillants au fromage et herbes.</p>
+              <div class="price">6,90 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://roseencuisine.com/wp-content/uploads/2022/05/9D974179-C802-4F6C-A807-4B8E98D4705D-scaled.jpeg" alt="Sambousek croustillants" loading="lazy" />
+              <h3>Sambousek viande</h3>
+              <p>Chaussons croustillants à la viande.</p>
+              <div class="price">6,90 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://twicpics.moulinex.be/https://sebplatform.api.groupe-seb.com/statics/06b821bd-a8ac-43c0-a7a6-5ffcac4dbb56.jpg?w=1920&fit=scale&twic=v1/quality=70/cover-max=740x555" alt="Sfiha aux épices et agneau" loading="lazy" />
+              <h3>Safiha</h3>
+              <p>Petites galettes garnies d'agneau, oignons et sumac.</p>
+              <div class="price">7,20 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://thumbs.dreamstime.com/b/falafel-22068475.jpg" alt="Falafel dorés servis avec herbes" loading="lazy" />
+              <h3>Falafel</h3>
+              <p>Boulettes dorées de pois chiches, coriandre et épices.</p>
+              <div class="price">6,40 €</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-title">
+            <h2>Desserts</h2>
+            <span>Signature sucrée</span>
+          </div>
+          <div class="section-illustration" aria-hidden="true">
+            <svg viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 54C40 36 60 30 80 30C100 30 120 36 136 54" stroke="#C7A054" stroke-width="4" stroke-linecap="round"/>
+              <rect x="34" y="42" width="92" height="24" rx="12" fill="#F7F1E7" stroke="#C7A054" stroke-width="3"/>
+              <circle cx="80" cy="40" r="8" fill="#C7A054"/>
+            </svg>
+          </div>
+          <div class="menu-grid">
+            <article class="menu-card">
+              <img class="menu-image" src="https://www.femmeactuelle.fr/imgre/fit/~1~fac~2022~03~07~75785539-3467-4b7f-abe1-69943f130bad.jpeg/1200x900/focusPoint/807%2C513/baklawa-libanais.jpg" alt="Baklawa au miel et pistaches" loading="lazy" />
+              <h3>Baklawa</h3>
+              <p>Feuilleté au miel, pistaches et fleur d'oranger.</p>
+              <div class="price">4,80 €</div>
+            </article>
+            <article class="menu-card">
+              <img class="menu-image" src="https://media-cdn.tripadvisor.com/media/photo-s/1b/ea/d7/2b/mhalabiye.jpg" alt="Mhalabiye au lait parfumé" loading="lazy" />
+              <h3>Mhalabiye</h3>
+              <p>Flan léger, lait parfumé, éclats de pistache.</p>
+              <div class="price">5,20 €</div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <section class="highlight">
+        <h3>Le cèdre libanais en fil conducteur</h3>
+        <p>
+          Notre identité s'articule autour du cèdre, symbole de convivialité et de longévité. Chaque plateau
+          est dressé avec la même précision : couleurs fraîches, textures contrastées, et un service discret
+          mais présent.
+        </p>
+      </section>
+
+      <footer>
+        Menu indicatif — tarifs par portion. Demandez nos formules pour événements privés ou professionnels.
+      </footer>
+    </div>
+  </body>
+</html>
