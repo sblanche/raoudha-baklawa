@@ -273,6 +273,24 @@
         line-height: 1.6;
       }
 
+      .highlight a {
+        color: #a57f3d;
+        text-decoration-color: rgba(165, 127, 61, 0.45);
+        text-underline-offset: 2px;
+        font-weight: 600;
+      }
+
+      .highlight a:visited {
+        color: var(--pine-dark);
+        text-decoration-color: rgba(22, 53, 40, 0.5);
+      }
+
+      .highlight a:hover,
+      .highlight a:focus-visible {
+        color: var(--gold);
+        text-decoration-color: var(--gold);
+      }
+
       footer {
         margin-top: 48px;
         text-align: center;
@@ -558,7 +576,7 @@
       </main>
 
       <section class="highlight">
-        <h3>Commandes</h3>
+        <h3>Prise de commande</h3>
         <p>
           Chaque plat est préparé à la commande, avec soin et générosité.<br/>
           Pour que tout soit prêt dans les meilleures conditions,
